@@ -32,10 +32,32 @@ const Home = () => {
                   message: {
                     block,
                     district,
-                    bankName,
+                    bank_name: bankName,
                   },
                 },
-              }).then((res) => setData(res.data.data.credit_products));
+              }).then((res) => {
+                console.log("response: ", res.data);
+                const data = res.data.message.catalogue.providers;
+                let items = [];
+                for (const provider of data) {
+                  items.push(
+                    ...provider.items.map((item: any) => {
+                      return {
+                        id: item.id,
+                        bank_name: item.provider.id,
+                        block: item.tags.block,
+                        district: item.tags.district,
+                        loan_product: item.descriptor.name,
+                        maximum_loan_amt: item.price,
+                        interest_rate: item.tags.interest_rate,
+                        loan_tenure: item.tags.loan_tenure,
+                        processing_charges: item.tags.processing_charges,
+                      };
+                    })
+                  );
+                }
+                setData(items);
+              });
             }}
           >
             Search
