@@ -9,7 +9,7 @@ const Home = (props: any) => {
   const [district, setDistrict] = useState<string>("");
   const [bankName, setBankName] = useState<string>("");
   const [data, setData] = useState<any[]>([]);
-
+  const [selectedBank, setSelectedBank] = useState<string>("");
   // socket states
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [showForm, setShowForm] = useState(false);
@@ -142,9 +142,11 @@ const Home = (props: any) => {
                 <th>
                   {" "}
                   <button
-                    id={item.id}
+                    id={`${item.id}.${item.bank_name}`}
+                    key={item.bank_name}
                     onClick={(e: any) => {
-                      const id = e.target.id;
+                      console.log("select target: ", e.target);
+                      const id = e.target.id.split(".")[0];
                       console.log("e.target: ", e.target);
                       console.log("id: ", id);
                       socket.emit("select", {
@@ -167,10 +169,10 @@ const Home = (props: any) => {
                         },
                         message: {
                           order: {
-                            id: "abde-order-101",
+                            id: `order-${Date.now()}`,
                             state: "draft",
                             provider: {
-                              id: data.filter((item) => item.id === id)[0],
+                              id: e.target.id.split(".")[1],
                             },
                             items: [
                               {
@@ -192,7 +194,11 @@ const Home = (props: any) => {
             ))}
           </tbody>
         </table>
-        {showForm ? <Init socket={socket} data={selectData} /> : <></>}
+        {showForm ? (
+          <Init socket={socket} data={selectData} action="init" />
+        ) : (
+          <></>
+        )}
         {showConfirm ? <Confirm socket={socket} data={confirmData} /> : <></>}
       </div>
     </div>

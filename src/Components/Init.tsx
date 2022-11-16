@@ -286,7 +286,7 @@ const Init = (props: any) => {
               payload.context.action = "init";
               payload.message.order.loan_application_doc = formToEmit;
               console.log("payload: ", payload);
-              props.socket.emit("init", payload);
+              props.socket.emit(props.action, payload);
             }}
           >
             Submit
