@@ -20,9 +20,10 @@ const UpdateApplication = (props: any) => {
 
     socket.on("response", (payload: any) => {
       console.log("payload: ", payload);
-      if (payload.context.action === "track") {
-        console.log(payload.message);
+      if (payload.context.action === "update") {
+        console.log("payload.message", payload.message);
         setStatus(payload.message.status);
+        alert("update submitted successfully");
       }
 
       if (payload.message.url) {
@@ -33,8 +34,13 @@ const UpdateApplication = (props: any) => {
           const targets =
             res.data.data.order_tracking_details[0].update_targets;
           console.log("fetched targets: ", targets);
-          setUpdateTargets(targets.split(","));
-          setOldFormData(res.data.data.loan_applications[0]);
+          console.log("old data: ", res.data.data);
+          console.log(
+            "res.data.data.loan_applications[0]: ",
+            res.data.data.loan_applications[0].order_details
+          );
+          if (targets) setUpdateTargets(targets.split(","));
+          setOldFormData(res.data.data.loan_applications[0].order_details);
         });
       }
     });
@@ -78,10 +84,13 @@ const UpdateApplication = (props: any) => {
             <button
               type="submit"
               onClick={(e) => {
+                console.log("old form data in event handler: ", oldFormData);
+
                 const payload = {
-                  oldFormData,
+                  order: oldFormData,
                   updates: formData,
                 };
+                console.log("payload in event handler: ", payload);
                 socket.emit("update", payload);
               }}
             >

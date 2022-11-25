@@ -39,6 +39,44 @@ const Init = (props: any) => {
     "PAN_card_number_of_guarantor",
   ];
 
+  type FORM_DATA = {
+    project_type: string;
+    district: string;
+    block: string;
+    branch: string;
+    loan_amount: string;
+    first_name: string;
+    middle_name: string;
+    last_name: string;
+    gender: string;
+    marital_status: string;
+    age: string;
+    mothers_name: string;
+    fathers_name: string;
+    date_of_birth: string;
+    educational_qualitfication: string;
+    PAN_Number: string;
+    Aadhar_Number: string;
+    Address: string;
+    Pin_Code: string;
+    Phone_number: string;
+    Email_Id: string;
+    Permanent_Address: string;
+    Permanent_Pin_Code: string;
+    Permanent_Phone_number: string;
+    Permanent_Email_Id: string;
+    Agricultural_Income_Source: string;
+    Agricultural_Income: string;
+    Other_Income_Source: string;
+    Other_Income: string;
+    Total_Income: string;
+    Guarantor_Name: string;
+    Relationship_with_Guarantor: string;
+    Mobile_number_of_the_guarantor: string;
+    Email_ID_of_the_Guarantor: string;
+    PAN_card_number_of_guarantor: string;
+  };
+
   /*
   const sample_loan_application_doc = {
     application_basic_info: {
