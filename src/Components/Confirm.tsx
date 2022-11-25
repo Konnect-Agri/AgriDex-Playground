@@ -35,32 +35,32 @@ const Confirm = (props: any) => {
       <div className="confirmBox">
         <h1> Confirm Your Details! </h1>
         <h3> Selected Loan Product </h3>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Bank Name</th>
-              <th>Block</th>
-              <th>District</th>
-              <th>Loan Product</th>
-              <th>Max Loan Amt</th>
-              <th>Interest Rate</th>
-              <th>Loan Tenure</th>
-              <th>Processing Charges</th>
+        <table className="customTable">
+          <thead className="customTable">
+            <tr className="customTable">
+              <th className="customTable">ID</th>
+              <th className="customTable">Bank Name</th>
+              <th className="customTable">Block</th>
+              <th className="customTable">District</th>
+              <th className="customTable">Loan Product</th>
+              <th className="customTable">Max Loan Amt</th>
+              <th className="customTable">Interest Rate</th>
+              <th className="customTable">Loan Tenure</th>
+              <th className="customTable">Processing Charges</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="customTable">
             {data ? (
-              <tr>
-                <th> {data.id} </th>
-                <th> {data.bank_name} </th>
-                <th> {data.block} </th>
-                <th> {data.district} </th>
-                <th> {data.loan_product} </th>
-                <th> {data.maximum_loan_amt} </th>
-                <th> {data.interest_rate} </th>
-                <th> {data.loan_tenure} </th>
-                <th> {data.processing_charges} </th>
+              <tr className="customTable">
+                <th className="customTable"> {data.id} </th>
+                <th className="customTable"> {data.bank_name} </th>
+                <th className="customTable"> {data.block} </th>
+                <th className="customTable"> {data.district} </th>
+                <th className="customTable"> {data.loan_product} </th>
+                <th className="customTable"> {data.maximum_loan_amt} </th>
+                <th className="customTable"> {data.interest_rate} </th>
+                <th className="customTable"> {data.loan_tenure} </th>
+                <th className="customTable"> {data.processing_charges} </th>
               </tr>
             ) : (
               <></>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Confirm from "./Confirm";
 import Init from "./Init";
+import { useStore } from "../store/store";
 
 const Home = (props: any) => {
   const socket = props.socket;
@@ -10,14 +11,20 @@ const Home = (props: any) => {
   const [bankName, setBankName] = useState<string>("");
   const [data, setData] = useState<any[]>([]);
   const [selectedBank, setSelectedBank] = useState<string>("");
+
   // socket states
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [showForm, setShowForm] = useState(false);
   const [selectData, setSelectData] = useState<any>({});
   const [confirmData, setConfirmData] = useState<any>({});
   const [showConfirm, setShowConfirm] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [aadharNumber, setAadharNumber] = useState("");
+  const setUsername = useStore((state) => state.setUsername);
+  let username = useStore((state) => state.username);
 
-  useEffect(() => {
+  useEffect((): any => {
     socket.on("connect", () => {
       console.log("socket connected");
       setIsConnected(true);
@@ -80,127 +87,167 @@ const Home = (props: any) => {
 
   return (
     <div>
-      <div>
+      {username === null ? (
         <div>
-          <label> Block </label>
-          <input type="text" onChange={(e) => setBlock(e.target.value)} />
-        </div>
-        <div>
-          <label> District </label>
-          <input type="text" onChange={(e) => setDistrict(e.target.value)} />
-        </div>
-        <div>
-          <label> Bank Name </label>
-          <input type="text" onChange={(e) => setBankName(e.target.value)} />
-        </div>
-        <div>
+          <h3> username: {username} </h3>
+          <input
+            type="text"
+            name="aadhar_number"
+            placeholder="aadhar_number"
+            onChange={(e) => setAadharNumber(e.target.value)}
+          />
           <button
             onClick={() => {
-              socket.emit("search", {
-                query: "",
-                filters: {
-                  bank_name: bankName,
-                  block,
-                  district,
-                },
-              });
+              setUsername(aadharNumber);
+              // useState.setState({ username: aadharNumber });
             }}
           >
-            Search
+            Login
           </button>
         </div>
-      </div>
-      <div>
-        <h1> Query Results are: </h1>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Bank Name</th>
-              <th>Block</th>
-              <th>District</th>
-              <th>Loan Product</th>
-              <th>Max Loan Amt</th>
-              <th>Interest Rate</th>
-              <th>Loan Tenure</th>
-              <th>Processing Charges</th>
-              <th> Select </th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item, key) => (
-              <tr key={key}>
-                <th> {item.id} </th>
-                <th> {item.bank_name} </th>
-                <th> {item.block} </th>
-                <th> {item.district} </th>
-                <th> {item.loan_product} </th>
-                <th> {item.maximum_loan_amt} </th>
-                <th> {item.interest_rate} </th>
-                <th> {item.loan_tenure} </th>
-                <th> {item.processing_charges} </th>
-                <th>
-                  {" "}
-                  <button
-                    id={`${item.id}.${item.bank_name}`}
-                    key={item.bank_name}
-                    onClick={(e: any) => {
-                      console.log("select target: ", e.target);
-                      const id = e.target.id.split(".")[0];
-                      console.log("e.target: ", e.target);
-                      console.log("id: ", id);
-                      socket.emit("select", {
-                        context: {
-                          action: "select",
-                          domain: "agriculture",
-                          core_version: "0.9.3",
-                          country: {
-                            code: "IND",
-                          },
-                          city: {
-                            code: "DEL",
-                          },
-                          timestamp: Date.now(),
-                          transaction_id: Date.now(),
-                          bap_id: 101,
-                          bap_uri: "http://localhost:3000",
-                          bpp_id: 301,
-                          bpp_uri: "http://localhost:3002",
-                        },
-                        message: {
-                          order: {
-                            id: `order-${Date.now()}`,
-                            state: "draft",
-                            provider: {
-                              id: e.target.id.split(".")[1],
-                            },
-                            items: [
-                              {
-                                id: id,
-                                quantity: 1,
+      ) : (
+        <>
+          <div>
+            <div>
+              <h3> Track the status of all your applications </h3>
+              <Link to="/track">
+                <button> Go to trackings page </button>
+              </Link>
+            </div>
+            <h1> OR </h1>
+            <div>
+              <label> Block </label>
+              <input type="text" onChange={(e) => setBlock(e.target.value)} />
+            </div>
+            <div>
+              <label> District </label>
+              <input
+                type="text"
+                onChange={(e) => setDistrict(e.target.value)}
+              />
+            </div>
+            <div>
+              <label> Bank Name </label>
+              <input
+                type="text"
+                onChange={(e) => setBankName(e.target.value)}
+              />
+            </div>
+            <div>
+              <button
+                onClick={() => {
+                  socket.emit("search", {
+                    query: "",
+                    filters: {
+                      bank_name: bankName,
+                      block,
+                      district,
+                    },
+                  });
+                }}
+              >
+                Search
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <h1> Query Results are: </h1>
+            <table className="customTable">
+              <thead className="customTable">
+                <tr className="customTable">
+                  <th className="customTable">ID</th>
+                  <th className="customTable">Bank Name</th>
+                  <th className="customTable">Block</th>
+                  <th className="customTable">District</th>
+                  <th className="customTable">Loan Product</th>
+                  <th className="customTable">Max Loan Amt</th>
+                  <th className="customTable">Interest Rate</th>
+                  <th className="customTable">Loan Tenure</th>
+                  <th className="customTable">Processing Charges</th>
+                  <th className="customTable"> Select </th>
+                </tr>
+              </thead>
+              <tbody className="customTable">
+                {data.map((item, key) => (
+                  <tr className="customTable" key={key}>
+                    <th className="customTable"> {item.id} </th>
+                    <th className="customTable"> {item.bank_name} </th>
+                    <th className="customTable"> {item.block} </th>
+                    <th className="customTable"> {item.district} </th>
+                    <th className="customTable"> {item.loan_product} </th>
+                    <th className="customTable"> {item.maximum_loan_amt} </th>
+                    <th className="customTable"> {item.interest_rate} </th>
+                    <th className="customTable"> {item.loan_tenure} </th>
+                    <th className="customTable"> {item.processing_charges} </th>
+                    <th className="customTable">
+                      {" "}
+                      <button
+                        id={`${item.id}.${item.bank_name}`}
+                        key={item.bank_name}
+                        onClick={(e: any) => {
+                          console.log("select target: ", e.target);
+                          const id = e.target.id.split(".")[0];
+                          console.log("e.target: ", e.target);
+                          console.log("id: ", id);
+                          socket.emit("select", {
+                            context: {
+                              action: "select",
+                              domain: "agriculture",
+                              core_version: "0.9.3",
+                              country: {
+                                code: "IND",
                               },
-                            ],
-                            created_at: Date.now(),
-                            update_at: Date.now(),
-                          },
-                        },
-                      });
-                    }}
-                  >
-                    Select
-                  </button>
-                </th>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {showForm ? (
-          <Init socket={socket} data={selectData} action="init" />
-        ) : (
-          <></>
-        )}
-        {showConfirm ? <Confirm socket={socket} data={confirmData} /> : <></>}
-      </div>
+                              city: {
+                                code: "DEL",
+                              },
+                              timestamp: Date.now(),
+                              transaction_id: Date.now(),
+                              bap_id: 101,
+                              bap_uri: "http://localhost:3000",
+                              bpp_id: 301,
+                              bpp_uri: "http://localhost:3002",
+                            },
+                            message: {
+                              order: {
+                                id: `order-${Date.now()}`,
+                                state: "draft",
+                                provider: {
+                                  id: e.target.id.split(".")[1],
+                                },
+                                items: [
+                                  {
+                                    id: id,
+                                    quantity: 1,
+                                  },
+                                ],
+                                created_at: Date.now(),
+                                update_at: Date.now(),
+                              },
+                            },
+                          });
+                        }}
+                      >
+                        Select
+                      </button>
+                    </th>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {showForm ? (
+              <Init socket={socket} data={selectData} action="init" />
+            ) : (
+              <></>
+            )}
+            {showConfirm ? (
+              <Confirm socket={socket} data={confirmData} />
+            ) : (
+              <></>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -138,32 +138,38 @@ const Init = (props: any) => {
     <div>
       <div>
         <h1> You have selected the following loan product! </h1>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Bank Name</th>
-              <th>Block</th>
-              <th>District</th>
-              <th>Loan Product</th>
-              <th>Max Loan Amt</th>
-              <th>Interest Rate</th>
-              <th>Loan Tenure</th>
-              <th>Processing Charges</th>
+        <table className="customTable">
+          <thead className="customTable">
+            <tr className="customTable">
+              <th className="customTable">ID</th>
+              <th className="customTable">Bank Name</th>
+              <th className="customTable">Block</th>
+              <th className="customTable">District</th>
+              <th className="customTable">Loan Product</th>
+              <th className="customTable">Max Loan Amt</th>
+              <th className="customTable">Interest Rate</th>
+              <th className="customTable">Loan Tenure</th>
+              <th className="customTable">Processing Charges</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="customTable">
             {selectedItem ? (
-              <tr>
-                <th> {selectedItem.id} </th>
-                <th> {selectedItem.bank_name} </th>
-                <th> {selectedItem.block} </th>
-                <th> {selectedItem.district} </th>
-                <th> {selectedItem.loan_product} </th>
-                <th> {selectedItem.maximum_loan_amt} </th>
-                <th> {selectedItem.interest_rate} </th>
-                <th> {selectedItem.loan_tenure} </th>
-                <th> {selectedItem.processing_charges} </th>
+              <tr className="customTable">
+                <th className="customTable"> {selectedItem.id} </th>
+                <th className="customTable"> {selectedItem.bank_name} </th>
+                <th className="customTable"> {selectedItem.block} </th>
+                <th className="customTable"> {selectedItem.district} </th>
+                <th className="customTable"> {selectedItem.loan_product} </th>
+                <th className="customTable">
+                  {" "}
+                  {selectedItem.maximum_loan_amt}{" "}
+                </th>
+                <th className="customTable"> {selectedItem.interest_rate} </th>
+                <th className="customTable"> {selectedItem.loan_tenure} </th>
+                <th className="customTable">
+                  {" "}
+                  {selectedItem.processing_charges}{" "}
+                </th>
               </tr>
             ) : (
               <></>

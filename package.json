@@ -14,7 +14,8 @@
     "react-dom": "^18.2.0",
     "react-json-to-table": "^0.1.7",
     "react-router-dom": "^6.4.3",
-    "socket.io-client": "^4.5.3"
+    "socket.io-client": "^4.5.3",
+    "zustand": "^4.1.4"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",
