@@ -4,6 +4,8 @@ import Confirm from "./Confirm";
 import Init from "./Init";
 import { useStore } from "../store/store";
 
+import HomeScreen from "../assets/images/homeScreen.jpg";
+
 const Home = (props: any) => {
   const socket = props.socket;
   const [block, setBlock] = useState<string>("");
@@ -88,22 +90,38 @@ const Home = (props: any) => {
   return (
     <div>
       {username === null ? (
-        <div>
-          <h3> username: {username} </h3>
-          <input
-            type="text"
-            name="aadhar_number"
-            placeholder="aadhar_number"
-            onChange={(e) => setAadharNumber(e.target.value)}
-          />
-          <button
-            onClick={() => {
-              setUsername(aadharNumber);
-              // useState.setState({ username: aadharNumber });
-            }}
-          >
-            Login
-          </button>
+        <div className="home-screen grid grid-cols-3 gap-4">
+          <div className="col-span-2">            
+          </div>
+          <div className="w-full max-w-xs h-screen flex justify-center items-center ">
+            <form className="bg-white shadow-md rounded px-8 mb-4 py-11">              
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2">
+                  Username
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="username"
+                  type="text"
+                  name="aadhar_number"
+                  placeholder="Enter your Aadhar number"
+                  onChange={(e) => setAadharNumber(e.target.value)}
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <button
+                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
+                  type="button"
+                  onClick={() => {
+                    setUsername(aadharNumber);
+                  }}
+                >
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
+          
         </div>
       ) : (
         <>
