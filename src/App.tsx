@@ -1,15 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-import "./App.css";
 import "./index.css";
 
-import Home from "./Components/Home";
-import Init from "./Components/Init";
-import Track from "./Components/Track";
-import Login from "./Components/Login";
-
 import io from "socket.io-client";
-import UpdateApplication from "./Components/UpdateApplication";
+
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Track from "./pages/Track";
+import TrackDetails from "./pages/TrackDetails";
+import Banks from "./pages/Banks";
+import LoanForm from "./pages/LoanForm";
+import LoanDetails from "./pages/LoanDetails";
 
 /*------------- END OF IMPORTS ------------- */
 
@@ -20,14 +20,16 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Home socket={socket} />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/init" element={<Init socket={socket} />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home socket={socket} />} />
+          <Route path="/banks" element={<Banks socket={socket} />} />
           <Route path="/track" element={<Track socket={socket} />} />
+          <Route path="/loanForm" element={<LoanForm socket={socket} />} />
           <Route
-            path="/track/:orderId"
-            element={<UpdateApplication socket={socket} />}
+            path="/loanDetails"
+            element={<LoanDetails socket={socket} />}
           />
+          <Route path="/track/:orderId" element={<TrackDetails />} />
         </Routes>
       </div>
     </Router>

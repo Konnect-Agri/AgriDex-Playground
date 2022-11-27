@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Init = (props: any) => {
+  const navigate = useNavigate();
   const formFiels = [
     "project_type",
     "district",
@@ -38,6 +40,92 @@ const Init = (props: any) => {
     "Email_ID_of_the_Guarantor",
     "PAN_card_number_of_guarantor",
   ];
+
+  const handleClick = (e: any) => {
+    e.preventDefault();
+    const formToEmit = {
+      application_basic_info: {
+        sector: formData.sector,
+        project_type: formData.project_type,
+        district: formData.district,
+        block: formData.block,
+        amount: formData.loan_amount,
+      },
+      applicant_details: {
+        basic_details: {
+          name:
+            formData.first_name +
+            " " +
+            formData.middle_name +
+            " " +
+            formData.last_name,
+          gender: formData.gender,
+          dob: formData.date_of_birth,
+          tags: {
+            marital_status: formData.marital_status,
+            fathers_name: formData.fathers_name,
+            mothers_name: formData.mothers_name,
+          },
+          pan_card_number: formData.PAN_Number,
+          aadhar_number: formData.Aadhar_Number,
+          educatioal_qualification: formData.educational_qualitfication,
+        },
+        temporary_correspondence_details: {
+          address: formData.Address,
+          //{
+          // building: "Sky Towers",
+          // street: "Street 1",
+          // locality: "Locality 1",
+          // ward: "Ward 1",
+          // city: "Angul",
+          // state: "Odisha",
+          // country: "INDIA",
+          // area_code: "124001",
+          // },
+          contact: {
+            phone: formData.Phone_number,
+            email: formData.Email_id,
+          },
+        },
+        permanent_correspondence_details: {
+          address: formData.Permanent_Address,
+          //{
+          // building: "Sky Towers",
+          // street: "Street 1",
+          // locality: "Locality 1",
+          // ward: "Ward 1",
+          // city: "Angul",
+          // state: "Odisha",
+          // country: "INDIA",
+          // area_code: "124001",
+          // },
+          contact: {
+            phone: formData.Permanent_Phone_number,
+            email: formData.Permanent_Email_id,
+          },
+        },
+        income_details: {
+          agricultural_income_source: formData.Agricultural_Income_Source,
+          agricultural_income: formData.Agricultural_Income,
+          other_income_source: formData.Other_Income_Source,
+          other_income: formData.Other_Income,
+          total_income: formData.Total_Income,
+        },
+        guarantor_details: {
+          name: formData.Guarantor_Name,
+          relationship: formData.Relationship_with_Guarantor,
+          mobile: formData.Mobile_number_of_the_guarantor,
+          email: formData.Email_ID_of_the_Guarantor,
+          pan_card_number: formData.PAN_card_number_of_guarantor,
+        },
+      },
+    };
+    const payload = props.data;
+    payload.context.action = "init";
+    payload.message.order.loan_application_doc = formToEmit;
+    props.socket.emit(props.action, payload);
+    navigate("/loanDetails");
+  };
 
   type FORM_DATA = {
     project_type: string;
@@ -198,15 +286,11 @@ const Init = (props: any) => {
                 <th className="customTable"> {selectedItem.block} </th>
                 <th className="customTable"> {selectedItem.district} </th>
                 <th className="customTable"> {selectedItem.loan_product} </th>
-                <th className="customTable">
-                  {" "}
-                  {selectedItem.maximum_loan_amt}{" "}
-                </th>
+                <th className="customTable">{selectedItem.maximum_loan_amt}</th>
                 <th className="customTable"> {selectedItem.interest_rate} </th>
                 <th className="customTable"> {selectedItem.loan_tenure} </th>
                 <th className="customTable">
-                  {" "}
-                  {selectedItem.processing_charges}{" "}
+                  {selectedItem.processing_charges}
                 </th>
               </tr>
             ) : (
@@ -230,9 +314,6 @@ const Init = (props: any) => {
                     type="text"
                     id={field}
                     onChange={(e: any) => {
-                      // const newForm = formData;
-                      // newForm[field] = e.target.value;
-                      // setFormData({ ...newForm });
                       setFormData({ ...formData, [field]: e.target.value });
                       console.log("form data: ", formData);
                     }}
@@ -241,98 +322,7 @@ const Init = (props: any) => {
               </div>
             );
           })}
-          <button
-            type="submit"
-            onClick={(e: any) => {
-              e.preventDefault();
-              console.log("e: ", e.target);
-              const formToEmit = {
-                application_basic_info: {
-                  sector: formData.sector,
-                  project_type: formData.project_type,
-                  district: formData.district,
-                  block: formData.block,
-                  amount: formData.loan_amount,
-                },
-                applicant_details: {
-                  basic_details: {
-                    name:
-                      formData.first_name +
-                      " " +
-                      formData.middle_name +
-                      " " +
-                      formData.last_name,
-                    gender: formData.gender,
-                    dob: formData.date_of_birth,
-                    tags: {
-                      marital_status: formData.marital_status,
-                      fathers_name: formData.fathers_name,
-                      mothers_name: formData.mothers_name,
-                    },
-                    pan_card_number: formData.PAN_Number,
-                    aadhar_number: formData.Aadhar_Number,
-                    educatioal_qualification:
-                      formData.educational_qualitfication,
-                  },
-                  temporary_correspondence_details: {
-                    address: formData.Address,
-                    //{
-                    // building: "Sky Towers",
-                    // street: "Street 1",
-                    // locality: "Locality 1",
-                    // ward: "Ward 1",
-                    // city: "Angul",
-                    // state: "Odisha",
-                    // country: "INDIA",
-                    // area_code: "124001",
-                    // },
-                    contact: {
-                      phone: formData.Phone_number,
-                      email: formData.Email_id,
-                    },
-                  },
-                  permanent_correspondence_details: {
-                    address: formData.Permanent_Address,
-                    //{
-                    // building: "Sky Towers",
-                    // street: "Street 1",
-                    // locality: "Locality 1",
-                    // ward: "Ward 1",
-                    // city: "Angul",
-                    // state: "Odisha",
-                    // country: "INDIA",
-                    // area_code: "124001",
-                    // },
-                    contact: {
-                      phone: formData.Permanent_Phone_number,
-                      email: formData.Permanent_Email_id,
-                    },
-                  },
-                  income_details: {
-                    agricultural_income_source:
-                      formData.Agricultural_Income_Source,
-                    agricultural_income: formData.Agricultural_Income,
-                    other_income_source: formData.Other_Income_Source,
-                    other_income: formData.Other_Income,
-                    total_income: formData.Total_Income,
-                  },
-                  guarantor_details: {
-                    name: formData.Guarantor_Name,
-                    relationship: formData.Relationship_with_Guarantor,
-                    mobile: formData.Mobile_number_of_the_guarantor,
-                    email: formData.Email_ID_of_the_Guarantor,
-                    pan_card_number: formData.PAN_card_number_of_guarantor,
-                  },
-                },
-              };
-              console.log("form to emit: ", formToEmit);
-              const payload = props.data;
-              payload.context.action = "init";
-              payload.message.order.loan_application_doc = formToEmit;
-              console.log("payload: ", payload);
-              props.socket.emit(props.action, payload);
-            }}
-          >
+          <button type="submit" onClick={(e: any) => handleClick(e)}>
             Submit
           </button>
         </div>
