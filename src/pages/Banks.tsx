@@ -99,10 +99,9 @@ const Banks = (props: any) => {
     navigate("/loanForm");
   };
   return (
-    <div>
-      <h1> Query Results are: </h1>
-
-      <table className="table-auto">
+    <div className="flex flex-col justify-center items-center h-screen">
+      <h1 className="text-white text-4xl mb-4 font-bold"> Query Results</h1>
+      <table className="table-auto font-regular bg-white bg-opacity-70 rounded">
         <thead className="bg-gray-200 px-4">
           <tr>
             <th className="py-3 px-4">S.NO</th>
@@ -119,21 +118,22 @@ const Banks = (props: any) => {
         </thead>
         <tbody>
           {data.map((item, key) => (
-            <tr key={key}>
-              <td> {key + 1} </td>
-              <td> {item.bank_name} </td>
-              <td> {item.block} </td>
-              <td> {item.district} </td>
-              <td> {item.loan_product} </td>
-              <td> {item.maximum_loan_amt} </td>
-              <td> {item.interest_rate} </td>
-              <td> {item.loan_tenure} </td>
-              <td> {item.processing_charges} </td>
-              <td>
+            <tr key={key} className="text-center border borrder-gray-500">
+              <th className="py-3"> {key + 1} </th>
+              <td className="py-3"> {item.bank_name} </td>
+              <td className="py-3"> {item.block} </td>
+              <td className="py-3"> {item.district} </td>
+              <td className="py-3"> {item.loan_product} </td>
+              <td className="py-3"> {item.maximum_loan_amt} </td>
+              <td className="py-3"> {item.interest_rate} </td>
+              <td className="py-3"> {item.loan_tenure} </td>
+              <td className="py-3"> {item.processing_charges} </td>
+              <td className="px-4">
                 <button
                   id={`${item.id}.${item.bank_name}`}
                   key={item.bank_name}
                   onClick={(e: any) => handleClick(e)}
+                  className="bg-green-700 hover:bg-green-900 text-white font-medium py-1 px-4 rounded focus:outline-none focus:shadow-outline my-2 w-full text-lg"
                 >
                   Select
                 </button>

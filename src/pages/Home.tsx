@@ -61,7 +61,7 @@ const Home = (props: any) => {
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="bg-green-700 hover:bg-green-900 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 w-full text-lg"
+              className="bg-green-800 hover:bg-green-900 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 w-full text-lg"
               type="button"
               onClick={handleClick}
             >
@@ -70,7 +70,7 @@ const Home = (props: any) => {
           </div>
         </form>
         <Link to="/track">
-          <button className="bg-transparent text-green-700 hover:text-white hover:bg-green-700 focus:shadow-outline border-2 border-green-700 font-medium py-2 px-4 rounded w-full mt-5 text-lg">
+          <button className="bg-transparent text-green-900 hover:text-white hover:bg-green-800 focus:shadow-outline border-2 border-green-800 font-medium py-2 px-4 rounded w-full mt-5 text-lg">
             Go to trackings page
           </button>
         </Link>

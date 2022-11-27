@@ -46,7 +46,7 @@ const Login = () => {
             </div>
             <div className="flex items-center justify-between">
               <button
-                className="bg-green-700 hover:bg-green-900 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 w-full text-lg"
+                className="bg-green-800 hover:bg-green-900 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 w-full text-lg"
                 type="button"
                 onClick={handleClick}
               >
