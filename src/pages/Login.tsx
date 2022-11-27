@@ -28,12 +28,12 @@ const Login = () => {
         </p>
       </div>
       <div className="w-full max-w-xs h-screen flex justify-center items-center ">
-        <div className="bg-white shadow-md rounded px-8 mb-4 py-11 w-full">
-          <h1 className="text-2xl font-bold">Log into your account</h1>
+        <div className="bg-white shadow-md rounded px-8 mb-4 py-11 w-full bg-opacity-70">
+          <h1 className="text-2xl font-bold text-gray-800">Login to your account</h1>
           <form className="mt-10">
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Enter your Aadhar Number
+              <label className="block text-gray-700 text-md font-regular mb-2">
+                Aadhar Number
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -46,7 +46,7 @@ const Login = () => {
             </div>
             <div className="flex items-center justify-between">
               <button
-                className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 w-full"
+                className="bg-green-700 hover:bg-green-900 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 w-full text-lg"
                 type="button"
                 onClick={handleClick}
               >
