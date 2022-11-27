@@ -12,33 +12,33 @@ const Init = (props: any) => {
     "first_name",
     "middle_name",
     "last_name",
-    "gender",
-    "marital_status",
-    "age",
-    "mothers_name",
-    "fathers_name",
-    "date_of_birth",
-    "educational_qualitfication",
-    "PAN_Number",
-    "Aadhar_Number",
-    "Address",
-    "Pin_Code",
-    "Phone_number",
-    "Email_Id",
-    "Permanent_Address",
-    "Permanent_Pin_Code",
-    "Permanent_Phone_number",
-    "Permanent_Email_Id",
-    "Agricultural_Income_Source",
-    "Agricultural_Income",
-    "Other_Income_Source",
-    "Other_Income",
-    "Total_Income",
-    "Guarantor_Name",
-    "Relationship_with_Guarantor",
-    "Mobile_number_of_the_guarantor",
-    "Email_ID_of_the_Guarantor",
-    "PAN_card_number_of_guarantor",
+    // "gender",
+    // "marital_status",
+    // "age",
+    // "mothers_name",
+    // "fathers_name",
+    // "date_of_birth",
+    // "educational_qualitfication",
+    // "PAN_Number",
+    // "Aadhar_Number",
+    // "Address",
+    // "Pin_Code",
+    // "Phone_number",
+    // "Email_Id",
+    // "Permanent_Address",
+    // "Permanent_Pin_Code",
+    // "Permanent_Phone_number",
+    // "Permanent_Email_Id",
+    // "Agricultural_Income_Source",
+    // "Agricultural_Income",
+    // "Other_Income_Source",
+    // "Other_Income",
+    // "Total_Income",
+    // "Guarantor_Name",
+    // "Relationship_with_Guarantor",
+    // "Mobile_number_of_the_guarantor",
+    // "Email_ID_of_the_Guarantor",
+    // "PAN_card_number_of_guarantor",
   ];
 
   const handleClick = (e: any) => {
@@ -262,7 +262,7 @@ const Init = (props: any) => {
 
   return (
     <div>
-      <div>
+      {/* <div>
         <h1> You have selected the following loan product! </h1>
         <table className="customTable">
           <thead className="customTable">
@@ -298,19 +298,27 @@ const Init = (props: any) => {
             )}
           </tbody>
         </table>
-      </div>
-      <div>
-        <h1> Loan Application Form </h1>
-        <div></div>
-        <div>
+      </div> */}
+      <div className="flex flex-col justify-center items-center min-h-screen">
+        <h1 className="text-white text-4xl mb-4 font-bold mt-10">
+          Loan Application Form
+        </h1>
+        <div className="bg-white bg-opacity-60 p-11 mb-10">
           {formFiels.map((field, index) => {
             return (
-              <div key={index}>
+              <div key={index} className="mb-2 w-full">
                 <div>
-                  <label htmlFor={field}> {field} </label>
+                  <label
+                    htmlFor={field}
+                    className="block text-gray-700 text-md font-regular mb-2"
+                  >
+                    {" "}
+                    {field}{" "}
+                  </label>
                 </div>
                 <div>
                   <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     type="text"
                     id={field}
                     onChange={(e: any) => {
@@ -322,7 +330,11 @@ const Init = (props: any) => {
               </div>
             );
           })}
-          <button type="submit" onClick={(e: any) => handleClick(e)}>
+          <button
+            className="bg-green-800 hover:bg-green-900 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 w-full text-lg"
+            type="submit"
+            onClick={(e: any) => handleClick(e)}
+          >
             Submit
           </button>
         </div>

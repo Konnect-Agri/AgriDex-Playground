@@ -7,8 +7,6 @@ const LoanForm = (props: any) => {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [showForm, setShowForm] = useState(false);
   const [selectData, setSelectData] = useState<any>({});
-  const [confirmData, setConfirmData] = useState<any>({});
-  const [showConfirm, setShowConfirm] = useState(false);
 
   useEffect((): any => {
     socket.on("connect", () => {
@@ -27,17 +25,10 @@ const LoanForm = (props: any) => {
         setSelectData(payload);
         swal({
           icon: "info",
-          text: "Kindly, fill out the loan application form",
+          text: "Kindly, fill out the loan application form of selected bank",
         });
       } else if (payload.context.action === "init") {
         console.log("init response received");
-        setConfirmData(payload);
-        setShowConfirm(true);
-      } else if (payload.context.action === "confirm") {
-        swal({
-          icon: "success",
-          text: "Your application has been successfully submitted for processing!",
-        });
       }
     });
 
