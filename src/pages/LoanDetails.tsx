@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Confirm from "../Components/Confirm";
+import Confirm from "../components/Confirm";
 import swal from "sweetalert";
 
 const LoanForm = (props: any) => {

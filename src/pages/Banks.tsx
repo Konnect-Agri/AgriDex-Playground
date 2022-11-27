@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Confirm from "../Components/Confirm";
+import Confirm from "../components/Confirm";
 import { useNavigate } from "react-router-dom";
 
 const Banks = (props: any) => {

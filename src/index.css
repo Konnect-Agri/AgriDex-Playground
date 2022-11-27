@@ -2,3 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Font family */
+@font-face {
+  font-family: Mulish-bold;
+  src: url("./assets/fonts/Mulish-Bold.ttf");
+  font-display: swap;
+}
+@font-face {
+  font-family: Mulish-demi;
+  src: url("./assets/fonts/Mulish-Demi.ttf");
+  font-display: swap;
+}
+@font-face {
+  font-family: Mulish-medium;
+  src: url("./assets/fonts/Mulish-Medium.ttf");
+  font-display: swap;
+}
+@font-face {
+  font-family: Mulish-regular;
+  src: url("./assets/fonts/Mulish-Regular.ttf");
+  font-display: swap;
+}
+
+body {
+  background-image: url("./assets/images/homeScreen.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}

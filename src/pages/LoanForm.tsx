@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Init from "../Components/Init";
+import Init from "../components/Init";
 import swal from "sweetalert";
 
 const LoanForm = (props: any) => {
