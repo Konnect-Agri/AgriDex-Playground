@@ -10,6 +10,7 @@ import TrackDetails from "./pages/TrackDetails";
 import Banks from "./pages/Banks";
 import LoanForm from "./pages/LoanForm";
 import LoanDetails from "./pages/LoanDetails";
+import Search from "./pages/Search";
 
 /*------------- END OF IMPORTS ------------- */
 
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home socket={socket} />} />
+          <Route path="/search" element={<Search socket={socket} />} />
           <Route path="/banks" element={<Banks socket={socket} />} />
           <Route path="/track" element={<Track socket={socket} />} />
           <Route path="/loanForm" element={<LoanForm socket={socket} />} />

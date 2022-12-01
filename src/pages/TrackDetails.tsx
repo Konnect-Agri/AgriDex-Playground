@@ -20,10 +20,10 @@ const TrackDetails = (props: any) => {
 
     socket.on("response", (payload: any) => {
       console.log("payload: ", payload);
-      if (payload.context.action === "update") {
+      if (payload.context.action == "track") {
         console.log("payload.message", payload.message);
         setStatus(payload.message.status);
-        alert("update submitted successfully");
+        // alert("update submitted successfully");
       }
 
       if (payload.message.url) {
@@ -50,7 +50,7 @@ const TrackDetails = (props: any) => {
     <div className="flex flex-col justify-center items-center min-h-screen">
       <h1 className="text-white text-4xl mb-4 font-bold mt-16">
         {" "}
-        Application Processing Status {status}
+        Application Processing Status: {status}
       </h1>
       <div className="bg-white shadow-md bg-opacity-70 px-8 py-10 w-2/5 mb-16">
         <div>
