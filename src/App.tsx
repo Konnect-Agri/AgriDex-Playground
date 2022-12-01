@@ -29,7 +29,10 @@ function App() {
             path="/loanDetails"
             element={<LoanDetails socket={socket} />}
           />
-          <Route path="/track/:orderId" element={<TrackDetails />} />
+          <Route
+            path="/track/:orderId"
+            element={<TrackDetails socket={socket} />}
+          />
         </Routes>
       </div>
     </Router>
