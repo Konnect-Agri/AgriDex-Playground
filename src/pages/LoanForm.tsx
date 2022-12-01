@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import Init from "../components/Init";
 import swal from "sweetalert";
 
@@ -38,7 +38,11 @@ const LoanForm = (props: any) => {
       socket.off("response");
     };
   }, []);
-  return showForm && <Init socket={socket} data={selectData} action="init" />;
+  return showForm ? (
+    <Init socket={socket} data={selectData} action="init" />
+  ) : (
+    <></>
+  );
 };
 
 export default LoanForm;

@@ -37,7 +37,7 @@ const LoanForm = (props: any) => {
       socket.off("response");
     };
   }, []);
-  return showConfirm && <Confirm socket={socket} data={confirmData} />;
+  return showConfirm ? <Confirm socket={socket} data={confirmData} /> : <></>;
 };
 
 export default LoanForm;
