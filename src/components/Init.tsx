@@ -9,9 +9,7 @@ const Init = (props: any) => {
     "block",
     "branch",
     "loan_amount",
-    "first_name",
-    "middle_name",
-    "last_name",
+    "name",
     "gender",
     "marital_status",
     "age",
@@ -20,15 +18,13 @@ const Init = (props: any) => {
     "date_of_birth",
     "educational_qualitfication",
     "PAN_Number",
-    "Aadhar_Number",
+    "aadhar_number",
     "Address",
     "Pin_Code",
-    "Phone_number",
+    "phone",
     "Email_Id",
-    "Permanent_Address",
-    "Permanent_Pin_Code",
-    "Permanent_Phone_number",
-    "Permanent_Email_Id",
+    "address",
+    "Pin_Code",
     "Agricultural_Income_Source",
     "Agricultural_Income",
     "Other_Income_Source",
@@ -36,7 +32,7 @@ const Init = (props: any) => {
     "Total_Income",
     "Guarantor_Name",
     "Relationship_with_Guarantor",
-    "Mobile_number_of_the_guarantor", 
+    "Mobile_number_of_the_guarantor",
     "Email_ID_of_the_Guarantor",
     "PAN_card_number_of_guarantor",
   ];
@@ -53,12 +49,7 @@ const Init = (props: any) => {
       },
       applicant_details: {
         basic_details: {
-          name:
-            formData.first_name +
-            " " +
-            formData.middle_name +
-            " " +
-            formData.last_name,
+          name: formData.name,
           gender: formData.gender,
           dob: formData.date_of_birth,
           tags: {
@@ -67,41 +58,21 @@ const Init = (props: any) => {
             mothers_name: formData.mothers_name,
           },
           pan_card_number: formData.PAN_Number,
-          aadhar_number: formData.Aadhar_Number,
+          aadhar_number: formData.aadhar_number,
           educatioal_qualification: formData.educational_qualitfication,
         },
         temporary_correspondence_details: {
-          address: formData.Address,
-          //{
-          // building: "Sky Towers",
-          // street: "Street 1",
-          // locality: "Locality 1",
-          // ward: "Ward 1",
-          // city: "Angul",
-          // state: "Odisha",
-          // country: "INDIA",
-          // area_code: "124001",
-          // },
+          address: formData.address,
           contact: {
-            phone: formData.Phone_number,
-            email: formData.Email_id,
+            phone: formData.phone,
+            email: formData.Email_Id,
           },
         },
         permanent_correspondence_details: {
-          address: formData.Permanent_Address,
-          //{
-          // building: "Sky Towers",
-          // street: "Street 1",
-          // locality: "Locality 1",
-          // ward: "Ward 1",
-          // city: "Angul",
-          // state: "Odisha",
-          // country: "INDIA",
-          // area_code: "124001",
-          // },
+          address: formData.address,
           contact: {
-            phone: formData.Permanent_Phone_number,
-            email: formData.Permanent_Email_id,
+            phone: formData.phone,
+            email: formData.Email_id,
           },
         },
         income_details: {
@@ -237,9 +208,9 @@ const Init = (props: any) => {
     },
   };
   */
-  const { socket, data } = props;
+  const { socket, data, parsedData } = props;
 
-  const [formData, setFormData] = useState<any>({});
+  const [formData, setFormData] = useState<any>(parsedData);
   const [selectedItem, setSelectedItem] = useState<any>(null);
   useEffect(() => {
     console.log("data in useeffect: ", data);
@@ -317,15 +288,29 @@ const Init = (props: any) => {
                   </label>
                 </div>
                 <div>
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    type="text"
-                    id={field}
-                    onChange={(e: any) => {
-                      setFormData({ ...formData, [field]: e.target.value });
-                      console.log("form data: ", formData);
-                    }}
-                  />
+                  {!parsedData[field] ? (
+                    <input
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      type="text"
+                      id={field}
+                      onChange={(e: any) => {
+                        setFormData({ ...formData, [field]: e.target.value });
+                        console.log("form data: ", formData);
+                      }}
+                    />
+                  ) : (
+                    <input
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      type="text"
+                      id={field}
+                      onChange={(e: any) => {
+                        setFormData({ ...formData, [field]: e.target.value });
+                        console.log("form data: ", formData);
+                      }}
+                      value={parsedData[field]}
+                      readOnly
+                    />
+                  )}
                 </div>
               </div>
             );

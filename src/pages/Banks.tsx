@@ -74,7 +74,7 @@ const Banks = (props: any) => {
         timestamp: Date.now(),
         transaction_id: Date.now(),
         bap_id: 101,
-        bap_uri: "http://localhost:3000",
+        bap_uri: "http://localhost:3010",
         bpp_id: 301,
         bpp_uri: "http://localhost:3002",
       },
