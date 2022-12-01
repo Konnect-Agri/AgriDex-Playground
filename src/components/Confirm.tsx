@@ -31,10 +31,15 @@ const Confirm = (props: any) => {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center min-h-screen">
       <div className="confirmBox">
-        <h1> Confirm Your Details! </h1>
-        <h3> Selected Loan Product </h3>
+        <h1 className="text-white text-4xl mb-4 font-bold text-center">
+          Confirm your details
+        </h1>
+        <h3 className="text-white text-2xl mb-4 font-medium text-center">
+          {" "}
+          Selected Loan Product{" "}
+        </h3>
         <table className="customTable">
           <thead className="customTable">
             <tr className="customTable">
@@ -70,6 +75,7 @@ const Confirm = (props: any) => {
         <h3> Loan Application Form </h3>
         <JsonToTable json={props.data.message.order.loan_application_doc} />
         <button
+          className="bg-green-800 hover:bg-green-900 text-white font-medium py-1 px-4 rounded focus:outline-none focus:shadow-outline my-2 w-full text-lg"
           onClick={(e) => {
             props.data.context.action = "confirm";
             props.socket.emit("confirm", props.data);

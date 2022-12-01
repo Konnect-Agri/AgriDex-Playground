@@ -133,7 +133,7 @@ const Banks = (props: any) => {
                   id={`${item.id}.${item.bank_name}`}
                   key={item.bank_name}
                   onClick={(e: any) => handleClick(e)}
-                  className="bg-green-700 hover:bg-green-900 text-white font-medium py-1 px-4 rounded focus:outline-none focus:shadow-outline my-2 w-full text-lg"
+                  className="bg-green-800 hover:bg-green-900 text-white font-medium py-1 px-4 rounded focus:outline-none focus:shadow-outline my-2 w-full text-lg"
                 >
                   Select
                 </button>

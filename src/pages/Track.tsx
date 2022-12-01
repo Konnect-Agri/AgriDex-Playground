@@ -55,25 +55,30 @@ const Track = (props: any) => {
   }, []);
 
   return (
-    <div>
+    <>
       {!isLoading ? (
-        <div>
-          <h1> Your applications: </h1>
-          <table className="customTable">
-            <thead className="customTable">
-              <tr className="customTable">
-                <th className="customTable"> Order ID </th>
-                <th className="customTable"> Check </th>
+        <div className="flex flex-col justify-center items-center min-h-screen my-16">
+          <h1 className="text-white text-4xl mb-4 font-bold">
+            Your Applications
+          </h1>
+          <table className="table-auto font-regular bg-white bg-opacity-70 rounded">
+            <thead className="bg-gray-200 px-11">
+              <tr>
+                <th className="py-3 px-4"> Order ID </th>
+                <th className="py-3 px-4"> Check </th>
               </tr>
             </thead>
-            <tbody className="customTable">
+            <tbody>
               {orders.map((order) => {
                 return (
-                  <tr className="customTable">
-                    <td className="customTable"> {order.order_id} </td>
-                    <td className="customTable">
+                  <tr className="text-center border">
+                    <td className="py-3 px-20"> {order.order_id} </td>
+                    <td className="py-3  px-20">
                       <Link to={`/track/${order.order_id}`}>
-                        <button> Check status </button>
+                        <button className="bg-green-800 hover:bg-green-900 text-white font-medium py-1 px-4 rounded focus:outline-none focus:shadow-outline my-2 w-full text-lg">
+                          {" "}
+                          Check status{" "}
+                        </button>
                       </Link>
                     </td>
                   </tr>
@@ -85,7 +90,7 @@ const Track = (props: any) => {
       ) : (
         <h1>Loading...</h1>
       )}
-    </div>
+    </>
   );
 };
 
