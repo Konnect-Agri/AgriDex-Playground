@@ -32,47 +32,42 @@ const Confirm = (props: any) => {
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
-      <div className="confirmBox">
+      <div className="my-16">
         <h1 className="text-white text-4xl mb-4 font-bold text-center">
           Confirm your details
         </h1>
-        <h3 className="text-white text-2xl mb-4 font-medium text-center">
-          {" "}
-          Selected Loan Product{" "}
-        </h3>
-        <table className="customTable">
-          <thead className="customTable">
+        <table className="table-auto font-regular bg-white bg-opacity-70 rounded">
+          <thead className="bg-gray-200 px-4">
             <tr className="customTable">
-              <th className="customTable">ID</th>
-              <th className="customTable">Bank Name</th>
-              <th className="customTable">Block</th>
-              <th className="customTable">District</th>
-              <th className="customTable">Loan Product</th>
-              <th className="customTable">Max Loan Amt</th>
-              <th className="customTable">Interest Rate</th>
-              <th className="customTable">Loan Tenure</th>
-              <th className="customTable">Processing Charges</th>
+              <th className="py-3 px-4">ID</th>
+              <th className="py-3 px-4">Bank Name</th>
+              <th className="py-3 px-4">Block</th>
+              <th className="py-3 px-4">District</th>
+              <th className="py-3 px-4">Loan Product</th>
+              <th className="py-3 px-4">Max Loan Amt</th>
+              <th className="py-3 px-4">Interest Rate</th>
+              <th className="py-3 px-4">Loan Tenure</th>
+              <th className="py-3 px-4">Processing Charges</th>
             </tr>
           </thead>
-          <tbody className="customTable">
+          <tbody>
             {data ? (
-              <tr className="customTable">
-                <th className="customTable"> {data.id} </th>
-                <th className="customTable"> {data.bank_name} </th>
-                <th className="customTable"> {data.block} </th>
-                <th className="customTable"> {data.district} </th>
-                <th className="customTable"> {data.loan_product} </th>
-                <th className="customTable"> {data.maximum_loan_amt} </th>
-                <th className="customTable"> {data.interest_rate} </th>
-                <th className="customTable"> {data.loan_tenure} </th>
-                <th className="customTable"> {data.processing_charges} </th>
+              <tr className="text-center border">
+                <td className="py-3"> {data.id} </td>
+                <td className="py-3"> {data.bank_name} </td>
+                <td className="py-3"> {data.block} </td>
+                <td className="py-3"> {data.district} </td>
+                <td className="py-3"> {data.loan_product} </td>
+                <td className="py-3"> {data.maximum_loan_amt} </td>
+                <td className="py-3"> {data.interest_rate} </td>
+                <td className="py-3"> {data.loan_tenure} </td>
+                <td className="py-3"> {data.processing_charges} </td>
               </tr>
             ) : (
               <></>
             )}
           </tbody>
         </table>
-        <h3> Loan Application Form </h3>
         <JsonToTable json={props.data.message.order.loan_application_doc} />
         <button
           className="bg-green-800 hover:bg-green-900 text-white font-medium py-1 px-4 rounded focus:outline-none focus:shadow-outline my-2 w-full text-lg"

@@ -118,7 +118,7 @@ const Banks = (props: any) => {
         </thead>
         <tbody>
           {data.map((item, key) => (
-            <tr key={key} className="text-center border borrder-gray-500">
+            <tr key={key} className="text-center border">
               <th className="py-3"> {key + 1} </th>
               <td className="py-3"> {item.bank_name} </td>
               <td className="py-3"> {item.block} </td>
