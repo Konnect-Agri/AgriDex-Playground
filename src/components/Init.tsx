@@ -303,7 +303,7 @@ const Init = (props: any) => {
         <h1 className="text-white text-4xl mb-4 font-bold mt-10">
           Loan Application Form
         </h1>
-        <div className="bg-white bg-opacity-60 p-11 mb-10">
+        <div className="bg-white bg-opacity-60 p-11 mb-10 w-2/5">
           {formFiels.map((field, index) => {
             return (
               <div key={index} className="mb-2 w-full">

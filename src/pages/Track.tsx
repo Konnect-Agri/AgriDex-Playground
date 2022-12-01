@@ -57,11 +57,11 @@ const Track = (props: any) => {
   return (
     <>
       {!isLoading ? (
-        <div className="flex flex-col justify-center items-center min-h-screen my-16">
-          <h1 className="text-white text-4xl mb-4 font-bold">
+        <div className="flex flex-col justify-center items-center min-h-screen">
+          <h1 className="text-white text-4xl mb-4 font-bold mt-16">
             Your Applications
           </h1>
-          <table className="table-auto font-regular bg-white bg-opacity-70 rounded">
+          <table className="table-auto font-regular bg-white bg-opacity-70 rounded mb-16">
             <thead className="bg-gray-200 px-11">
               <tr>
                 <th className="py-3 px-4"> Order ID </th>

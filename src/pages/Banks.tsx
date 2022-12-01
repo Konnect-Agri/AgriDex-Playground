@@ -99,7 +99,7 @@ const Banks = (props: any) => {
     navigate("/loanForm");
   };
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
+    <div className="flex flex-col justify-center items-center min-h-screen">
       <h1 className="text-white text-4xl mb-4 font-bold"> Query Results</h1>
       <table className="table-auto font-regular bg-white bg-opacity-70 rounded">
         <thead className="bg-gray-200 px-4">
