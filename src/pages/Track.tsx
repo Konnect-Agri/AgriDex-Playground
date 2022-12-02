@@ -23,7 +23,7 @@ const Track = (props: any) => {
       method: "POST",
       url: "http://localhost:3003/orders",
       data: {
-        client_id: username,
+        client_id: localStorage.getItem("email"),
       },
     }).then((res) => {
       console.log("user trackings: ", res.data);

@@ -1,9 +1,9 @@
 import { SyntheticEvent, useCallback, useState } from "react";
 import { useStore } from "../store/store";
 import { useNavigate } from "react-router-dom";
-import { Button, Form, Container, Row, Col, Card } from 'react-bootstrap';
+import { Button, Form, Container, Row, Col, Card } from "react-bootstrap";
 import home from "../styles/Home.module.css";
-import  toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 import axios from "axios";
 const AapplicationId = "27690896-b128-474a-b171-0c3057d55bed";
 const Login = () => {
@@ -19,25 +19,32 @@ const Login = () => {
   const [loginId, setLoginId] = useState();
   const [password, setPassword] = useState();
   const navigateTo = useNavigate();
-  const handleLogin = useCallback((e: SyntheticEvent) => {
+  const handleLogin = useCallback(
+    (e: SyntheticEvent) => {
       e.preventDefault();
       const url = `https://auth.konnect.samagra.io/api/login`;
       const config = {
-          headers: {
-              'Content-Type': 'application/json',
-              Authorization: `HZmKaLCvHMJ36eChXdSpdT7IMqKXr-3rpldpCTmwBJxKFKDf-1h31QwN`
-          }
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `HZmKaLCvHMJ36eChXdSpdT7IMqKXr-3rpldpCTmwBJxKFKDf-1h31QwN`,
+        },
       };
-      console.log("vbn:",{loginId,password})
-      axios.post(url, { loginId, password, applicationId: AapplicationId }, config).then(res => {
-          if(res?.data?.token){
-              localStorage.setItem('token',res?.data?.token);
-              navigateTo("/home")
+      console.log("vbn:", { loginId, password });
+      axios
+        .post(url, { loginId, password, applicationId: AapplicationId }, config)
+        .then((res) => {
+          if (res?.data?.token) {
+            localStorage.setItem("email", loginId);
+            localStorage.setItem("token", res?.data?.token);
+            navigateTo("/home");
           }
-      }).catch(err => {            
-          toast.error(err.message)
-      });
-  }, [loginId,password]);
+        })
+        .catch((err) => {
+          toast.error(err.message);
+        });
+    },
+    [loginId, password]
+  );
 
   return (
     <div className="grid grid-cols-3 gap-4">
@@ -56,26 +63,41 @@ const Login = () => {
       </div>
       <div className="w-full max-w-xs h-screen flex justify-center items-center ">
         <div className="bg-white shadow-md rounded px-8 mb-4 py-11 w-full bg-opacity-70">
-          <h1 className="text-2xl font-bold text-gray-800">Login to your account</h1>
-         
-                        <Form >
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>User Name</Form.Label>
-                                <Form.Control type="text" placeholder="User Id" value={loginId} onChange={(e: any) => {
-                                    console.log(e.target.value)
-                                    setLoginId(e.target.value)}} />                                
-                            </Form.Group>
+          <h1 className="text-2xl font-bold text-gray-800">
+            Login to your account
+          </h1>
 
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" value={password} onChange={(e: any) => {setPassword(e.target.value)}} />
-                            </Form.Group>
-                           
-                            <Button variant="primary" onClick={handleLogin}>
-                                Login
-                            </Button>
-                        </Form>
-                    
+          <Form>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>User Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="User Id"
+                value={loginId}
+                onChange={(e: any) => {
+                  console.log(e.target.value);
+                  setLoginId(e.target.value);
+                }}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e: any) => {
+                  setPassword(e.target.value);
+                }}
+              />
+            </Form.Group>
+
+            <Button variant="primary" onClick={handleLogin}>
+              Login
+            </Button>
+          </Form>
+
           {/* <form className="mt-10">
             <div className="mb-4">
               <label className="block text-gray-700 text-md font-regular mb-2">

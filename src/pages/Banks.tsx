@@ -91,6 +91,13 @@ const Banks = (props: any) => {
               quantity: 1,
             },
           ],
+          fulfilment: {
+            customer: {
+              person: {
+                cred: localStorage.getItem("email"),
+              },
+            },
+          },
           created_at: Date.now(),
           update_at: Date.now(),
         },
