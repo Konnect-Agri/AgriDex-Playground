@@ -11,10 +11,11 @@ import Banks from "./pages/Banks";
 import LoanForm from "./pages/LoanForm";
 import LoanDetails from "./pages/LoanDetails";
 import Search from "./pages/Search";
-import  { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 /*------------- END OF IMPORTS ------------- */
 
 const socket = io("http://localhost:3003");
+// const socket = io("https://api.safal.konnect.samagra.io");
 
 function App() {
   return (

@@ -24,24 +24,25 @@ const TrackDetails = (props: any) => {
         console.log("payload.message", payload.message);
         setStatus(payload.message.status);
         // alert("update submitted successfully");
-      }
-
-      if (payload.message.url) {
-        Axios({
-          method: "GET",
-          url: payload.message.url,
-        }).then((res) => {
-          const targets =
-            res.data.data.order_tracking_details[0].update_targets;
-          console.log("fetched targets: ", targets);
-          console.log("old data: ", res.data.data);
-          console.log(
-            "res.data.data.loan_applications[0]: ",
-            res.data.data.loan_applications[0].order_details
-          );
-          if (targets) setUpdateTargets(targets.split(","));
-          setOldFormData(res.data.data.loan_applications[0].order_details);
-        });
+        if (payload.message.url) {
+          Axios({
+            method: "GET",
+            url: payload.message.url,
+          }).then((res) => {
+            const targets =
+              res.data.data.order_tracking_details[0].update_targets;
+            console.log("fetched targets: ", targets);
+            console.log("old data: ", res.data.data);
+            console.log(
+              "res.data.data.loan_applications[0]: ",
+              res.data.data.loan_applications[0].order_details
+            );
+            if (targets) setUpdateTargets(targets.split(","));
+            setOldFormData(res.data.data.loan_applications[0].order_details);
+          });
+        }
+      } else if (payload.context.action == "update") {
+        alert("update submitted successfully");
       }
     });
   }, []);
@@ -49,10 +50,9 @@ const TrackDetails = (props: any) => {
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
       <h1 className="text-white text-4xl mb-4 font-bold mt-16">
-        {" "}
         Application Processing Status: {status}
       </h1>
-      <div className="bg-white shadow-md bg-opacity-70 px-8 py-10 w-2/5 mb-16">
+      <div className="bg-white shadow-md bg-opacity-70 {" "}px-8 py-10 w-2/5 mb-16">
         <div>
           <div>
             <h4> Current Form </h4>
