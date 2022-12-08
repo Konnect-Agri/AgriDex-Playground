@@ -52,7 +52,7 @@ const TrackDetails = (props: any) => {
       <h1 className="text-white text-4xl mb-4 font-bold mt-16">
         Application Processing Status: {status}
       </h1>
-      <div className="bg-white shadow-md bg-opacity-70 {" "}px-8 py-10 w-2/5 mb-16">
+      <div className="bg-white shadow-md bg-opacity-70 px-8 py-10 w-2/5 mb-16">
         <div>
           <div>
             <h4> Current Form </h4>

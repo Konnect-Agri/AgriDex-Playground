@@ -21,7 +21,7 @@ const Track = (props: any) => {
     // socket.emit("track", { order_id: orderId });
     Axios({
       method: "POST",
-      url: "http://localhost:3003/orders",
+      url: "https://api.safal.konnect.samagra.io/orders",
       data: {
         client_id: localStorage.getItem("email"),
       },

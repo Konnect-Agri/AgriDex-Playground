@@ -14,8 +14,8 @@ import Search from "./pages/Search";
 import { Toaster } from "react-hot-toast";
 /*------------- END OF IMPORTS ------------- */
 
-const socket = io("http://localhost:3003");
-// const socket = io("https://api.safal.konnect.samagra.io");
+// const socket = io("http://localhost:3003");
+const socket = io("https://api.safal.konnect.samagra.io");
 
 function App() {
   return (

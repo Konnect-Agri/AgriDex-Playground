@@ -22,6 +22,15 @@ const Banks = (props: any) => {
 
     socket.on("response", (payload: any) => {
       console.log("payload in response: ", payload);
+      //saving the BAP and BPP id
+      // RN doing this hack works, since there is only one BPP,
+      // but BPP_URI or BPP_ID will need to be stored at the item level
+      // in future when the number of BPPs is increased
+
+      localStorage.setItem("BAP_URI", payload.context.bap_uri);
+      localStorage.setItem("BAP_ID", payload.context.bap_id);
+      localStorage.setItem("BPP_URI", payload.context.bpp_uri);
+      localStorage.setItem("BPP_ID", payload.context.bpp_id);
       if (payload.context.action === "search") {
         const data = payload.message.catalogue.providers;
         let items = [];
@@ -73,10 +82,10 @@ const Banks = (props: any) => {
         },
         timestamp: Date.now(),
         transaction_id: Date.now(),
-        bap_id: 101,
-        bap_uri: "http://localhost:3010",
-        bpp_id: 301,
-        bpp_uri: "http://localhost:3002",
+        bap_id: localStorage.getItem("BAP_ID"),
+        bap_uri: localStorage.getItem("BAP_URI"),
+        bpp_id: localStorage.getItem("BPP_ID"),
+        bpp_uri: localStorage.getItem("BPP_URI"),
       },
       message: {
         order: {
