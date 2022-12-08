@@ -34,7 +34,7 @@ const Login = () => {
         .post(url, { loginId, password, applicationId: AapplicationId }, config)
         .then((res) => {
           if (res?.data?.token) {
-            localStorage.setItem("email", loginId);
+            localStorage.setItem("email", loginId ? loginId : "");
             localStorage.setItem("token", res?.data?.token);
             navigateTo("/home");
           }
